@@ -3,154 +3,57 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
 
 namespace AddressbookWebTests
 {
     [TestFixture]
-    public class ContactCreationTests
+    public class ContactCreationTests : TestBase
     {
-        private IWebDriver driver;
-        private StringBuilder verificationErrors;
-        private string baseURL;
-        private bool acceptNextAlert = true;
-
-        [SetUp]
-        public void SetupTest()
-        {
-            driver = new FirefoxDriver();
-            baseURL = "http://localhost/addressbook/";
-            verificationErrors = new StringBuilder();
-        }
-
-        [TearDown]
-        public void TeardownTest()
-        {
-            try
-            {
-                driver.Quit();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-            Assert.AreEqual("", verificationErrors.ToString());
-        }
 
         [Test]
         public void ContactCreationTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToContactCreationPage();
-            ContactData contact = new ContactData("Игорь");
-            contact.Middlename = "Владимирович";
-            contact.Lastname = "Лебедев";
-            contact.Nickname = "Лололо";
-            FillContactForm(contact);
-            SubmitContactCreation();
-            ReturnToHomePage();
-            Loguot();
+            ContactData contact = new ContactData("Пупок");
+            contact.Middlename = "Pupkevich";
+            contact.Lastname = "Пупк0ff";
+            contact.Nickname = "§╝╝╝╝╝┼";
+            contact.Title = "Что-то написано";
+            contact.Company = "Суперкомпания";
+            contact.Address = "Какой-то адресс";
+            contact.Home = "8442 77 22 11";
+            contact.Mobile = "9 999 99 99 99";
+            contact.Work = "8 888 88 88 88";
+            contact.Fax = "Какой-то факс";
+            contact.Email = "456789@email.org";
+            contact.Byear = "1245";
+            contact.Ayear = "1999";
+            contact.Address2 = "Какой-то второй адресс";
+            contact.Notes = "Хз что тут должно быть";
+
+            app.Contacts.Create(contact);
         }
 
-        private void Loguot()
+        [Test]
+        public void EmptyContactCreationTest()
         {
-            driver.FindElement(By.LinkText("Logout")).Click();
+            ContactData contact = new ContactData("");
+            contact.Middlename = "";
+            contact.Lastname = "";
+            contact.Nickname =
+            contact.Title = "";
+            contact.Company = "";
+            contact.Address = "";
+            contact.Home = "";
+            contact.Mobile = "";
+            contact.Work = "";
+            contact.Fax = "";
+            contact.Email = "";
+            contact.Byear = "";
+            contact.Ayear = "";
+            contact.Address2 = "";
+            contact.Notes = "";
+
+            app.Contacts.Create(contact);
         }
-
-        private void ReturnToHomePage()
-        {
-            driver.FindElement(By.LinkText("home page")).Click();
-        }
-
-        //private void SubmitContactCreation()
-        //{
-        //    driver.FindElement(By.Name("submit")).Click();
-        //}
-
-        //private void FillContactForm(ContactData contact)
-        //{
-        //    driver.FindElement(By.Name("firstname")).Click();
-        //    driver.FindElement(By.Name("firstname")).Clear();
-        //    driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
-        //    driver.FindElement(By.Name("middlename")).Click();
-        //    driver.FindElement(By.Name("middlename")).Clear();
-        //    driver.FindElement(By.Name("middlename")).SendKeys(contact.Lastname);
-        //    driver.FindElement(By.Name("lastname")).Click();
-        //    driver.FindElement(By.Name("lastname")).Clear();
-        //    driver.FindElement(By.Name("lastname")).SendKeys(contact.Middlename);
-        //    driver.FindElement(By.Name("nickname")).Click();
-        //    driver.FindElement(By.Name("nickname")).Clear();
-        //    driver.FindElement(By.Name("nickname")).SendKeys(contact.Nickname);
-        //}
-
-        //private void GoToContactCreationPage()
-        //{
-        //    driver.FindElement(By.LinkText("add new")).Click();
-        //}
-
-        //private void Login(AccountData account)
-        //{
-        //    driver.FindElement(By.Name("user")).Clear();
-        //    driver.FindElement(By.Name("user")).SendKeys(account.Username);
-        //    driver.FindElement(By.Name("pass")).Clear();
-        //    driver.FindElement(By.Name("pass")).SendKeys(account.Password);
-        //    driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-        //}
-
-        //private void OpenHomePage()
-        //{
-        //    driver.Navigate().GoToUrl(baseURL);
-        //}
-
-        //private bool IsElementPresent(By by)
-        //{
-        //    try
-        //    {
-        //        driver.FindElement(by);
-        //        return true;
-        //    }
-        //    catch (NoSuchElementException)
-        //    {
-        //        return false;
-        //    }
-        //}
-
-        //private bool IsAlertPresent()
-        //{
-        //    try
-        //    {
-        //        driver.SwitchTo().Alert();
-        //        return true;
-        //    }
-        //    catch (NoAlertPresentException)
-        //    {
-        //        return false;
-        //    }
-        //}
-
-        //private string CloseAlertAndGetItsText()
-        //{
-        //    try
-        //    {
-        //        IAlert alert = driver.SwitchTo().Alert();
-        //        string alertText = alert.Text;
-        //        if (acceptNextAlert)
-        //        {
-        //            alert.Accept();
-        //        }
-        //        else
-        //        {
-        //            alert.Dismiss();
-        //        }
-        //        return alertText;
-        //    }
-        //    finally
-        //    {
-        //        acceptNextAlert = true;
-        //    }
-        //}
     }
 }

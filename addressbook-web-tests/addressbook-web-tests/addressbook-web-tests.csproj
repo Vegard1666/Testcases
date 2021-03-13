@@ -59,7 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContactHelper.cs" />
+    <Compile Include="Appmanager\ContactHelper.cs" />
+    <Compile Include="Tests\ForContacts\ContactModificationTests.cs" />
     <Compile Include="Model\AccountData.cs" />
     <Compile Include="Appmanager\AppManager.cs" />
     <Compile Include="Model\ContactData.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Tests\ForGroups\GroupModificationTests.cs" />
     <Compile Include="Tests\ForGroups\GroupRemovalTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
+    <Compile Include="Tests\ForContacts\ContactRemovalTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

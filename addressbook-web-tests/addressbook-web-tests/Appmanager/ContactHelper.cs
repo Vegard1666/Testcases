@@ -9,14 +9,14 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AddressbookWebTests
 {
-    class ContactHelper : HelperBase
+    public class ContactHelper : HelperBase
     {
         public ContactHelper(AppManager manager) : base(manager)
         {
         }
 
         public ContactHelper Create(ContactData contact)
-        {            
+        {
             InitNewContactCreation();
             FillContactForm(contact);
             SubmitContactCreation();
@@ -25,10 +25,29 @@ namespace AddressbookWebTests
         }
 
         public ContactHelper Remove(int v) // доделать логику
-        {            
+        {
             SelectContact(v);
-            DeleteContact();
-            manager.Navigator.ReturnToGroupsPage();
+            DeleteContact();            
+            return this;
+        }
+        public ContactHelper Modify(int v, ContactData newData)
+        {            
+            InitContactModifiation(v);
+            FillContactForm(newData);
+            SubmitContactModification();
+            manager.Navigator.ReturnToContactsPage();
+            return this;
+        }
+
+        public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public ContactHelper InitContactModifiation(int index)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
             return this;
         }
 
@@ -72,37 +91,36 @@ namespace AddressbookWebTests
             driver.FindElement(By.Name("work")).SendKeys(contact.Work);
             driver.FindElement(By.Name("fax")).Click();
             driver.FindElement(By.Name("fax")).Clear();
-            driver.FindElement(By.Name("fax")).SendKeys(contact.Fax);
-            driver.FindElement(By.Name("theform")).Click();
+            driver.FindElement(By.Name("fax")).SendKeys(contact.Fax);            
             driver.FindElement(By.Name("email")).Click();
             driver.FindElement(By.Name("email")).Clear();
-            driver.FindElement(By.Name("email")).SendKeys(contact.Email);            
+            driver.FindElement(By.Name("email")).SendKeys(contact.Email);
             driver.FindElement(By.Name("bday")).Click();
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("16"); // попрробовать задать как параметр
-            driver.FindElement(By.XPath("//option[@value='16']")).Click();
+            // driver.FindElement(By.XPath("//option[@value='16']")).Click();
             driver.FindElement(By.Name("bmonth")).Click();
             new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText("October");
-            driver.FindElement(By.XPath("//option[@value='October']")).Click();
+            // driver.FindElement(By.XPath("//option[@value='October']")).Click();
             driver.FindElement(By.Name("byear")).Click();
             driver.FindElement(By.Name("byear")).Clear();
             driver.FindElement(By.Name("byear")).SendKeys(contact.Byear);
             driver.FindElement(By.Name("aday")).Click();
             new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText("15");
-            driver.FindElement(By.XPath("(//option[@value='15'])[2]")).Click();
+            // driver.FindElement(By.XPath("(//option[@value='15'])[2]")).Click();
             driver.FindElement(By.Name("amonth")).Click();
-            new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("November");
-            driver.FindElement(By.XPath("(//option[@value='November'])[2]")).Click();
+            new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("December");
+            // driver.FindElement(By.XPath("//option[@value='december']")).Click();
             driver.FindElement(By.Name("ayear")).Click();
             driver.FindElement(By.Name("ayear")).Clear();
-            driver.FindElement(By.Name("ayear")).SendKeys(contact.Ayear);            
+            driver.FindElement(By.Name("ayear")).SendKeys(contact.Ayear);
             driver.FindElement(By.Name("address2")).Click();
             driver.FindElement(By.Name("address2")).Clear();
-            driver.FindElement(By.Name("address2")).SendKeys(contact.Address2);           
+            driver.FindElement(By.Name("address2")).SendKeys(contact.Address2);
             driver.FindElement(By.Name("notes")).Click();
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contact.Notes);
             return this;
-        }
+        }        
 
         public ContactHelper SelectContact(int index)
         {
@@ -118,7 +136,9 @@ namespace AddressbookWebTests
 
         public ContactHelper DeleteContact()
         {
-            driver.FindElement(By.Name("Delete")).Click();
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
             return this;
         }
+    }
 }
