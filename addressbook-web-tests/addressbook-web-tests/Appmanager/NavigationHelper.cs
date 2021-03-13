@@ -32,6 +32,11 @@ namespace AddressbookWebTests
         {
             driver.FindElement(By.LinkText("group page")).Click();
         }
+
+        public void ReturnToContactsPage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
+        }
     }
 }
 

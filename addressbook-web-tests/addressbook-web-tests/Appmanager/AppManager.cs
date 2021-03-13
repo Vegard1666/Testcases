@@ -44,8 +44,7 @@ namespace AddressbookWebTests
 
             loginHelper = new LoginHelper(this);
             navigationHelper = new NavigationHelper(this, baseURL);
-            groupHelper = new GroupHelper(this);
-
+            groupHelper = new GroupHelper(this);           
         }
 
         public LoginHelper Auth
