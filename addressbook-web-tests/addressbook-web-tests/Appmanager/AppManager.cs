@@ -11,13 +11,20 @@ namespace AddressbookWebTests
 {
     public class AppManager
     {
-        
-        protected LoginHelper loginHelper;
-        protected NavigationHelper navigationHelper;
-        protected GroupHelper groupHelper;
 
         protected IWebDriver driver;
         protected string baseURL;
+        protected LoginHelper loginHelper;
+        protected NavigationHelper navigationHelper;
+        protected GroupHelper groupHelper;        
+
+        public IWebDriver Driver 
+        {
+            get 
+            { 
+                return driver;
+            } 
+        }
 
         public void Stop()
         {
@@ -35,9 +42,9 @@ namespace AddressbookWebTests
             driver = new FirefoxDriver();
             baseURL = "http://localhost/addressbook/";
 
-            loginHelper = new LoginHelper(driver);
-            navigationHelper = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
+            loginHelper = new LoginHelper(this);
+            navigationHelper = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
 
         }
 
@@ -63,7 +70,6 @@ namespace AddressbookWebTests
             {
                 return groupHelper;
             }
-        }
-
+        }        
     }
 }

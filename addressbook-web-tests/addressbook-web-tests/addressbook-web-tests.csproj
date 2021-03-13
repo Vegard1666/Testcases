@@ -61,20 +61,17 @@
   <ItemGroup>
     <Compile Include="Model\AccountData.cs" />
     <Compile Include="Appmanager\AppManager.cs" />
-    <Compile Include="Circle.cs" />
     <Compile Include="Model\ContactData.cs" />
-    <Compile Include="Figure.cs" />
     <Compile Include="Model\GroupData.cs" />
     <Compile Include="Appmanager\GroupHelper.cs" />
     <Compile Include="Appmanager\HelperBase.cs" />
     <Compile Include="Appmanager\LoginHelper.cs" />
     <Compile Include="Appmanager\NavigationHelper.cs" />
-    <Compile Include="Square.cs" />
-    <Compile Include="FigureTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\GroupCreationTests.cs" />
-    <Compile Include="Tests\ContactCreationTests.cs" />
-    <Compile Include="Tests\GroupRemovalTests.cs" />
+    <Compile Include="Tests\ForGroups\GroupCreationTests.cs" />
+    <Compile Include="Tests\ForContacts\ContactCreationTests.cs" />
+    <Compile Include="Tests\ForGroups\GroupModificationTests.cs" />
+    <Compile Include="Tests\ForGroups\GroupRemovalTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>

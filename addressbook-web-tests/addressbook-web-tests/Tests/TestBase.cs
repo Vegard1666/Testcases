@@ -14,8 +14,11 @@ namespace AddressbookWebTests
         [SetUp]
         public void SetupTest()
         {
-            app = new AppManager();           
+            app = new AppManager();
+            app.Navigator.GoToHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
         }
+
 
         [TearDown]       
         public void TeardownTest()
