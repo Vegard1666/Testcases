@@ -17,9 +17,7 @@ namespace AddressbookWebTests
             group.Header = "2";
             group.Footer = "1";
             
-            app.Groups.Create(group);
-            app.Navigator.ReturnToGroupsPage();
-            app.Auth.Logout();
+            app.Groups.Create(group);            
         }
 
         [Test]
@@ -29,9 +27,7 @@ namespace AddressbookWebTests
             group.Header = "";
             group.Footer = "";
             
-            app.Groups.Create(group);
-            app.Navigator.ReturnToGroupsPage();
-            app.Auth.Logout();
+            app.Groups.Create(group);                     
         }
     }
 }
