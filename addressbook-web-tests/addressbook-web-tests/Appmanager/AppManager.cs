@@ -48,12 +48,14 @@ namespace AddressbookWebTests
 
         public static AppManager GetInstance()
         {
-            if (! app.IsValueCreated)
-            {
-                app.Value = new AppManager();
-            }
+           // if (! app.IsValueCreated) не работает при запуске всех тестов
+            //{
+                AppManager newInstance = new AppManager();
+                newInstance.Navigator.GoToHomePage();
+                app.Value = newInstance;
+            //}
             return app.Value;
-        }
+        }        
 
         public IWebDriver Driver 
         {

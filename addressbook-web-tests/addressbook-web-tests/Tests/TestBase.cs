@@ -12,9 +12,9 @@ namespace AddressbookWebTests
         protected AppManager app;
         
         [SetUp]
-        public void SetupTest()
+        public void SetupAppManager()
         {
-            app = AppManager.GetInstance();
+            app = AppManager.GetInstance();            
         }                          
     }
 }

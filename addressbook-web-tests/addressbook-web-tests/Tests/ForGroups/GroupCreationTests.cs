@@ -2,12 +2,13 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace AddressbookWebTests
 {
     [TestFixture]
-    public class GroupCreationTests : TestBase
+    public class GroupCreationTests : AuthTestBase
     {
         
         [Test]
@@ -16,8 +17,11 @@ namespace AddressbookWebTests
             GroupData group = new GroupData("3");
             group.Header = "2";
             group.Footer = "1";
-            
-            app.Groups.Create(group);            
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            app.Groups.Create(group);
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
 
         [Test]
@@ -26,8 +30,11 @@ namespace AddressbookWebTests
             GroupData group = new GroupData("");
             group.Header = "";
             group.Footer = "";
-            
-            app.Groups.Create(group);                     
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            app.Groups.Create(group);
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
     }
 }
