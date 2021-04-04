@@ -34,9 +34,24 @@ namespace AddressbookWebTests
                 manager.Navigator.GoToGroupsPage();
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
                 foreach (IWebElement element in elements)
+                {                                
+                    groupCashe.Add(new GroupData(null) {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
+
+                string allGroupNames = driver.FindElement(By.CssSelector("div#content form")).Text;
+                string[] parts = allGroupNames.Split('\n');
+                int shift = groupCashe.Count - parts.Length;
+                for (int i = 0; i < groupCashe.Count; i++)
                 {
-                    groupCashe.Add(new GroupData(element.Text));
-                }                
+                    if (i < shift)
+                    {
+                        groupCashe[i].Name = "";
+                    }
+                    else 
+                    groupCashe[i].Name = parts[i-shift].Trim();
+                }
             }
             return new List<GroupData>(groupCashe);
         }

@@ -28,7 +28,7 @@ namespace AddressbookWebTests
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
+            Assert.AreEqual(oldGroups, newGroups);            
         }
 
         [Test]

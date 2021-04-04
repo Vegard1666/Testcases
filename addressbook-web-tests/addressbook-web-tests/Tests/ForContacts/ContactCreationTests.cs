@@ -13,9 +13,8 @@ namespace AddressbookWebTests
         [Test]
         public void ContactCreationTest()
         {
-            ContactData contact = new ContactData("Пупок");
-            contact.Middlename = "Pupkevich";
-            contact.Lastname = "Пупк0ff";
+            ContactData contact = new ContactData("Пупок", "Пупк0ff");
+            contact.Middlename = "Pupkevich";            
             contact.Nickname = "§╝╝╝╝╝┼";
             contact.Title = "Что-то написано";
             contact.Company = "Суперкомпания";
@@ -36,10 +35,9 @@ namespace AddressbookWebTests
         [Test]
         public void EmptyContactCreationTest()
         {
-            ContactData contact = new ContactData("");
+            ContactData contact = new ContactData("", "");
             contact.Middlename = "";
-            contact.Lastname = "";
-            contact.Nickname =
+            contact.Nickname = "";
             contact.Title = "";
             contact.Company = "";
             contact.Address = "";
