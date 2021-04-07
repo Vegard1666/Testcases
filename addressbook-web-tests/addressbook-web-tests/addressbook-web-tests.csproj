@@ -72,6 +72,7 @@
     <Compile Include="Appmanager\LoginHelper.cs" />
     <Compile Include="Appmanager\NavigationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\ForContacts\SearchTests.cs" />
     <Compile Include="Tests\ForGroups\GroupCreationTests.cs" />
     <Compile Include="Tests\ForContacts\ContactCreationTests.cs" />
     <Compile Include="Tests\ForGroups\GroupModificationTests.cs" />
