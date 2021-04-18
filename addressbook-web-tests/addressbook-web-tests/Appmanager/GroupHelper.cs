@@ -24,6 +24,15 @@ namespace AddressbookWebTests
             return this;
         }
 
+        public GroupHelper Remove(GroupData group)
+        {
+            manager.Navigator.GoToGroupsPage();
+            SelectGroup(group.Id);
+            RemoveGroupe();
+            manager.Navigator.ReturnToGroupsPage();
+            return this;
+        }
+
         private List<GroupData> groupCashe = null;
 
         public List<GroupData> GetGroupList()
@@ -56,10 +65,10 @@ namespace AddressbookWebTests
             return new List<GroupData>(groupCashe);
         }
 
-        public GroupHelper Modify(int v, GroupData newData)
+        public GroupHelper Modify(GroupData group, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup(v);
+            SelectGroup(group.Id);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -115,6 +124,13 @@ namespace AddressbookWebTests
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
             return this;
         }
+
+        public GroupHelper SelectGroup(String id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+id+"'])")).Click();
+            return this;
+        }
+
         public GroupHelper InitGroupModification()
         {
             driver.FindElement(By.Name("edit")).Click();

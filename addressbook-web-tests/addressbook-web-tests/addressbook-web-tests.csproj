@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Appmanager\ContactHelper.cs" />
+    <Compile Include="Tests\GroupTestBase.cs" />
     <Compile Include="Model\AddressbookDB.cs" />
     <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Tests\ForContacts\ContactInformationTests.cs" />

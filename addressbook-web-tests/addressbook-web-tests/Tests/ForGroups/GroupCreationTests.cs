@@ -14,7 +14,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 namespace AddressbookWebTests
 {
     [TestFixture]
-    public class GroupCreationTests : AuthTestBase
+    public class GroupCreationTests : GroupTestBase
     {
         
         public static IEnumerable<GroupData> RandomGroupDataProvider() //генерит рандомные данные
